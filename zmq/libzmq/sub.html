@@ -1,0 +1,59 @@
+<head>
+    <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>
+    <script src="https://unpkg.com/@prodatalab/jszmq@0.2.2/lib/index.js"></script>
+</head>
+
+<!-- <input type="file" onchange="readFile(this)"> -->
+<div id='status'>
+    status of load
+</div>
+
+<script>
+    window.onresize = function() {
+            console.log('resize window');
+            var update = {
+                    width: '90%',
+                    height: '90%'
+                };
+            // Plotly.relayout('plot', update);
+        };
+    function readFile(input) {
+            let file = input.files[0];
+
+            let reader = new FileReader();
+
+            reader.readAsArrayBuffer(file);
+
+            reader.onload = function() {
+                    console.log(reader.result);
+                    var view = new Float32Array(reader.result);
+                    console.log(view);
+                    var x = Array(view.length).fill().map((x,i)=>i);
+                    console.log(x);
+                    TESTER = document.getElementById('plot');
+                    Plotly.newPlot( TESTER, [{
+                            x: x,
+                            y: view 
+                        }],
+                            {
+                                    margin: { t: 10 } 
+                                } );
+
+                };
+            reader.onprogress = function() {
+                    console.log('on progress');
+                    const element = document.getElementById("status");
+                    element.innerHTML = 'Loading' 
+                }
+            reader.onloadend = function() {
+                    console.log('load ended');
+                    const element = document.getElementById("status");
+                    element.innerHTML = 'Done Loading' 
+                }
+            reader.onerror = function() {
+                    console.log(reader.error);
+                };
+
+        }
+</script>
+
