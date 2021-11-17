@@ -1,7 +1,5 @@
 from numba import jit
 import numpy as np
-import time
-import timeit
 
 # Sliding Goertzel
 def sg(x, k=25*4):
@@ -47,10 +45,7 @@ def sg_jit(x, k=25*4):
 def main():
     data = np.fromfile('../single_tone_v2.dat', dtype=np.int32)
     data = data>>14
-    print(time.time())
     yjit = sg_jit(data, k=100)
-    yjit = sg_jit(data, k=100)
-    print(time.time())
     yjit.tofile('sg2.out')
     y = sg(data, k=100)
      
