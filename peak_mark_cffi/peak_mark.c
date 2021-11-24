@@ -76,12 +76,16 @@ pk_result_t * peakMark(double *y, int N, settings_t *settings, history_t *histor
                     last_result->next = new_result;
                 }
                 last_result = new_result;
-                start = -1;
-                length = 0;
-                pk_idx = -1;
-                pk = -1;
+                /* start = -1; */
+                /* length = 0; */
+                /* pk_idx = -1; */
+                /* pk = -1; */
                 time_since_pk = time_since_pk - time_pk;
             }
+            start = -1;
+            length = 0;
+            pk_idx = -1;
+            pk = -1;
         }
         /* if (start>0) */ 
         /*     printf("%d %d %d %d\r\n", i, start, length, pk_idx); */
