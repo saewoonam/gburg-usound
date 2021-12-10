@@ -3,13 +3,16 @@ from numba import jit
 
 @jit
 def peak_marking_v2(y, lag, threshold, influence, width, mph, signals): #, filteredY):
-    filteredY = np.zeros(lag)
+    filteredY = np.zeros(int(lag))
     avgFilter = 0
     stdFilter = 0
     std2 = stdFilter**2
     pks = []
     start, length, pk, pk_idx = -1, 0, -1, -1
-    for i in range(0, len(y)):
+    #print('len(y)', len(y))
+    i=0
+    #for i in range(0, len(y)):
+    while i<len(y):
         # if i == lag:
         #     print(avgFilter, stdFilter)
         oldValue = filteredY[i%lag] # store this for use to update mean and std
@@ -45,10 +48,11 @@ def peak_marking_v2(y, lag, threshold, influence, width, mph, signals): #, filte
         std2 = std2 + (filteredY[i%lag] - oldValue)*(filteredY[i%lag] + oldValue - avgFilter - prevAvg) /lag
         stdFilter = std2**0.5
         #stdFilter = np.std(filteredY)
+        i += 1
     return pks
 
 
-@jit
+
 def pk_mark(y, lag, threshold, influence, width, mph):
     """Find and mark peaks using z-scor algorithm
     
@@ -66,7 +70,8 @@ def pk_mark(y, lag, threshold, influence, width, mph):
     mph: double: minimum peak hieght
     """
     signals = np.zeros(len(y))
-    pks = peak_marking_v2(y, lag, threshold, influence, width, mph, signals)
+    #filteredY = np.zeros(int(lag))
+    pks = peak_marking_v2(y, int(lag), threshold, influence, width, mph, signals)
     return pks, signals
 
 
