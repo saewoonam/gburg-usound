@@ -1,0 +1,4 @@
+400cm : RPi1 and RPi2 are 4 meters apart. Both devices face each other. RPi1 transmit and RPi2 listening. 
+400cm_Rev: RPi1 and RPi2 are 4 meters apart. Both devices face each other. RPi2 transmit and RPi1 listening. 
+500cm : RPi1 and RPi2 are 5 meters apart. Both devices face each other. RPi1 transmit and RPi2 listening. 
+500cm_Rev: RPi1 and RPi2 are 5 meters apart. Both devices face each other. RPi2 transmit and RPi1 listening. 
